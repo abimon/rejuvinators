@@ -75,7 +75,7 @@
                             <textarea name="body" class="form-control mb-1" id="body" cols="30" rows="10"></textarea>	
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Image</span>
-                                <input type="File" name="image" class="form-control" accept="image/*" >
+                                <input type="file" name="image" class="form-control" accept="image/*" >
                             </div>
                             <button class="btn btn-success m-2"><i class="fa fa-paper-plane fa-fw"></i>Post</button>
                         </form>
@@ -170,7 +170,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="audio">Upload Images</h5>
+                        <h5 class="modal-title" id="image">Upload Images</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="/upload_image" method="POST" enctype="multipart/form-data">
@@ -202,5 +202,8 @@
                 </div>
             </div>
         </div>
+<script>
+	CKEDITOR.replace('body');
+</script>
 {{View::make('footer')}}
         

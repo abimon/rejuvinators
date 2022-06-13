@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="rejuves,poetry,spokenword,jkusda,rejuvinators,events">
     <title>{{$title}}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.8.0/ckeditor.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/css/bootstrap.min.css" integrity="sha512-o/MhoRPVLExxZjCFVBsm17Pkztkzmh7Dp8k7/3JrtNCHh0AQ489kwpfA3dPSHzKDe8YCuEhxXq3Y71eb/o6amg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/js/bootstrap.bundle.min.js" integrity="sha512-ndrrR94PW3ckaAvvWrAzRi5JWjF71/Pw7TlSo6judANOFCmz0d+0YE+qIGamRRSnVzSvIyGs4BTtyFMm3MT/cg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
@@ -18,16 +20,12 @@
             z-index: 99; /* Make sure it does not overlap */
             border: none; /* Remove borders */
             outline: none; /* Remove outline */
-            background-color: green; /* Set a background color */
-            color: white; /* Text color */
+            background-color: transparent; /* Set a background color */
+            color: green; /* Text color */
             cursor: pointer; /* Add a mouse pointer on hover */
             padding: 10px; /* Some padding */
             border-radius: 50%; /* Rounded corners */
-            font-size: 18px; /* Increase font size */
-            }
-
-            #myBtn:hover {
-            background-color: #555; /* Add a dark-grey background on hover */
+            font-size: 32px; /* Increase font size */
             }
     </style>
 </head>
@@ -46,28 +44,28 @@
                                 <a class="nav-link" aria-current="page" href="/">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="poetry">Poetry</a>
+                                <a class="nav-link" href="poetry/1">Poetry</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="spokenword">Spoken Word</a>
+                                <a class="nav-link" href="/spokenword">Spoken Word</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="music">Music</a>
+                                <a class="nav-link" href="/music">Music</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="gallery">Gallery</a>
+                                <a class="nav-link" href="/gallery">Gallery</a>
                             </li>
                         </ul>
                     </b>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 @if(Session::has('user'))
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard">Dashboard</a>
+                        <a class="nav-link" href="/dashboard">Dashboard</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
                 @else
-                    <li class="nav-item"><a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#sign">Signup</a></li>
-                    <li class="nav-item"><a class="nav-link"href="" data-bs-toggle="modal" data-bs-target="#login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="/#sign">Signup</a></li>
+                    <li class="nav-item"><a class="nav-link"href="" data-bs-toggle="modal" data-bs-target="/#login">Login</a></li>
                 @endif
                 </ul>
                 </div>

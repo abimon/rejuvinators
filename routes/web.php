@@ -51,4 +51,7 @@ Route::get('/dashboard',[mainController::class,'dashboard']);
 Route::post('/upload_audio',[mainController::class,'upload_audio']);
 Route::get('/music',[mainController::class,'music']);
 Route::post('/upload_video',[mainController::class,'upload_video']);
+Route::post('/upload_image',[mainController::class,'upload_image']);
 Route::get('/gallery',[mainController::class,'gallery']);
+Route::get('/poetry/{id}',[mainController::class,'poetry']);
+Route::post('/writePoem',[mainController::class,'upload_post']);

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Video;
 use App\Models\Post;
+use App\Models\Image;
+use Illuminate\Support\Facades\DB;
 
 class mainController extends Controller
 {
@@ -84,20 +86,52 @@ class mainController extends Controller
     function upload_post(Request $req){
         if($req->hasFile('image')){
             //file name with extension
-            $filename=$req->title;
-            $filenametostore= time().$filename;
+            $filename=$req->topic;
+            $extension=$req->file('image')->getClientOriginalExtension();
+            $filenametostore= time().$filename.".".$extension;
             //upload
-            $path=$req->file('image')->storeAs('public/music', $filenametostore);
+            $path=$req->file('image')->storeAs('public/posts', $filenametostore);
         }
         $post = new Post;
-        $post->user_id=$req->user_id;
+        $post->user_id=$req->userId;
         $post->title=$req->title;
         $post->topic=$req->topic;
         $post->date=$req->date;
-        $post->post=$req->post;
-        $post->image=$req->filenametostore;
+        $post->post=$req->body;
+        $post->image=$filenametostore;
         $post->save();
         return redirect('dashboard');
+    }
+    function poetry($id){
+        $poem=Post::join('users','posts.user_id','=', 'users.id')->where('posts.id',$id)->get();
+        $poems=DB::table('posts')
+        ->join('users','posts.user_id','=', 'users.id')
+        ->select('posts.*',  'posts.id as item_id')->get();
+        return view('poetry', ['poem'=>$poem,'poems'=>$poems]);
+    }
+    function upload_image(Request $req){
+        if($req->hasFile('image')){
+            foreach($req->file('image') as $image){
+                $validate=[
+                    'image' => 'required|file|max:8192'
+                ];
+                //file name with extension
+                $filename=$image;
+                $filenametostore= time().$filename;
+                //upload
+                $path=$req->$image->storeAs('public/images', $filenametostore);
+                
+                $post = new Image;
+                $post->user_id=$req->user_id;
+                $post->title=$req->title;
+                $post->event=$req->event;
+                $post->date=$req->date;
+                $post->image=$req->filenametostore;
+                $post->save();
+            }
+            return redirect('dashboard');
+        }
+        
     }
     function music(){
         $music=Audios::all();
