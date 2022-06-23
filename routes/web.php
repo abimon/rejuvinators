@@ -21,12 +21,6 @@ Route::get('/logout', function () {
     Session::forget('user');
     return redirect('/');
 });
-Route::get('/storage-link', function(){
-    $target = storage_path('app/public');
-    $link = public_path('/storage');
-    symlink($target, $link);
-    echo "symbolic link created successfully";
-});
 Route::get('dashboard', function () {
     return view('dashboard');
 });

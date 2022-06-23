@@ -64,8 +64,8 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
                 @else
-                    <li class="nav-item"><a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="/#sign">Signup</a></li>
-                    <li class="nav-item"><a class="nav-link"href="" data-bs-toggle="modal" data-bs-target="/#login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#sign">Signup</a></li>
+                    <li class="nav-item"><a class="nav-link"href="" data-bs-toggle="modal" data-bs-target="#login">Login</a></li>
                 @endif
                 </ul>
                 </div>
@@ -93,6 +93,10 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="user"><i class="fa-solid fa-user fa-fw"></i></span>
                             <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="user">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="user"><i class="fa-solid fa-user fa-fw"></i></span>
+                            <input type="month" name="username" class="form-control">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="email"><i class="fa-solid fa-envelope fa-fw"></i></span>
