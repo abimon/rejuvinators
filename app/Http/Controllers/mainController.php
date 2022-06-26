@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Models\Video;
 use App\Models\Post;
 use App\Models\Image;
-use App\Models\Spokens;
+use App\Models\Word;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -88,7 +88,7 @@ class mainController extends Controller
             //upload
             $path=$req->file('audio')->storeAs('public/music', $filenametostore);
         }
-        $audio = new Spokens;
+        $audio = new Word;
         $audio->user_id=$req->user_id;
         $audio->title=$req->title;
         $audio->topic=$req->topic;
@@ -162,9 +162,9 @@ class mainController extends Controller
         return view('music', ['files'=>$music]);
     }
     function spoken(){
-        $files=Spokens::join('users','spoken.user_id','=', 'users.id')
-        ->select('spoken.*',  'spoken.id as file_id')->get();
-        return view('spoken', ['files'=>$files]);
+        $files=Word::join('users','words.user_id','=', 'users.id')
+        ->select('words.*','users.*',  'words.id as file_id')->get();
+        return view('spokenword', ['files'=>$files]);
     }
     function gallery(){
         $video=Video::all();
