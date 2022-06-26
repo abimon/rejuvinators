@@ -55,13 +55,13 @@
                 <div class="col-md-6">
                     <div class="row text-info">
                         <div class="col-4 p-3">
-                            <a href=""><i class="fa-brands fa-facebook fa-fw fa-7x"></i></a>
+                            <a href=""><i class="fa-brands fa-facebook fa-fw fa-5x"></i></a>
                         </div>
                         <div class="col-4 p-3">
-                            <a href=""><i class="fa-brands fa-twitter fa-fw fa-7x"></i></a>
+                            <a href=""><i class="fa-brands fa-twitter fa-fw fa-5x"></i></a>
                         </div>
                         <div class="col-4 p-3">
-                            <a href=""><i class="fa-brands fa-instagram fa-fw fa-7x"></i></a>
+                            <a href=""><i class="fa-brands fa-instagram fa-fw fa-5x"></i></a>
                         </div>
                     </div>
                 </div>
