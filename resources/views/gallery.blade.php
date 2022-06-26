@@ -13,19 +13,5 @@
         @endforeach
     </div>
     @endif
-    <h2>Gallery</h2>
-    <div class="container row d-flex justify-content-center">
-        @foreach($images as $image)
-            <div class="col-3 m-1 card" style="width:18rem;">
-                <a target="_blank" href="{{asset('storage/static/banner.jpg')}}">
-                    <img src="{{asset('storage/static/$image->image')}}" class="card-img-top">
-                </a>
-                <button class="btn btn-success badge">{{$image->category}}</button>
-                <div class="card-body">
-                    <div class="card-title">{{$image->title}}</div>
-                    <div class="card-text">Created on: <i>{{$image->date}}</i> </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
+    
 {{View::make('footer')}}

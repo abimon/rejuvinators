@@ -9,18 +9,28 @@ use App\Models\User;
 use App\Models\Video;
 use App\Models\Post;
 use App\Models\Image;
+use App\Models\Spokens;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class mainController extends Controller
 {
     function login(Request $req){
+        $credentials = $req->validate([
+            'username' => ['required'],
+            'password' => ['required'],
+        ]);
         $user= User::where(['username'=>$req->username]) ->first();
-        if(!$user || !Hash::check($req->password, $user->password)){
-            return "Username or password is not matching";
-        }
-        else{
-            $req->session()->put('user',$user);
-            return redirect('/dashboard');
+        if($credentials){
+            if(!$user || !Hash::check($req->password, $user->password)){
+                return back()->withErrors([
+                    'username' => 'The provided email do not match our records.',
+                ]);
+            }
+            else{
+                $req->session()->put('user',$user);
+                return redirect('/dashboard');
+            }
         }
     }
     function signup(Request $req){   
@@ -37,9 +47,6 @@ class mainController extends Controller
             $filenametostore=$filename.'_'.time().'.'.$extension;   
             //upload
             $path=$req->file('profile')->storeAs('public/profile_images', $filenametostore);
-        }
-        else{
-            $filenametostore='noimage.jpg';
         }
         $user= new User;
         $user->username=$req->username;
@@ -65,6 +72,23 @@ class mainController extends Controller
             $path=$req->file('audio')->storeAs('public/music', $filenametostore);
         }
         $audio = new Audios;
+        $audio->user_id=$req->user_id;
+        $audio->title=$req->title;
+        $audio->topic=$req->topic;
+        $audio->date=$req->date;
+        $audio->audio=$filenametostore;
+        $audio->save();
+        return redirect('dashboard');
+    }
+    function upload_word(Request $req){
+        if($req->hasFile('audio')){
+            //file name with extension
+            $filename=$req->title;
+            $filenametostore= time().$filename;
+            //upload
+            $path=$req->file('audio')->storeAs('public/music', $filenametostore);
+        }
+        $audio = new Spokens;
         $audio->user_id=$req->user_id;
         $audio->title=$req->title;
         $audio->topic=$req->topic;
@@ -137,9 +161,15 @@ class mainController extends Controller
         $music=Audios::all();
         return view('music', ['files'=>$music]);
     }
+    function spoken(){
+        $files=Spokens::join('users','spoken.user_id','=', 'users.id')
+        ->select('spoken.*',  'spoken.id as file_id')->get();
+        return view('spoken', ['files'=>$files]);
+    }
     function gallery(){
         $video=Video::all();
-        return view('gallery', ['files'=>$video]);
+        $images=Image::all();
+        return view('gallery', ['files'=>$video, 'images'=>$images]);
     }
 
 }

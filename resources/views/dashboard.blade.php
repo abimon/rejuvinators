@@ -1,7 +1,7 @@
 {{View::make('header',['title'=>'Dashboard'])}}
     <div class="container-fluid m-1">
         <div class="row accordion accordion-flush" id="accordionFlushExample" >
-            <div class="col-3 bg-light" style="min-height:450px;font-family:cursive;">
+            <!--<div class="col-3 bg-light" style="min-height:450px;font-family:cursive;">
                 <div class="d-flex justify-content-center">
                     <img style="border-radius:50%; "src="{{asset('storage/profile_images/'.Session::get('user')['profile'])}}"   class="card-img-top w-50 p-2">
                 </div>
@@ -25,11 +25,23 @@
                         Repository
                     </p>
                 </div>
-                
+                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Disabled popover">
+                    <button class="btn btn-primary" type="button" disabled>Disabled button</button>
+                </span>
+            </div>-->
+            <div class="nav col-md-1 m-1">
+                <ul style="list-style:none; ">
+                    <li class="mt-2 text-dark" type="button" ><i ><img src="{{asset('storage/profile_images/'.Session::get('user')['profile'])}}" class="w-100" style="border-radius:50%;"></i></li>
+                    <li class="mt-2 text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#Users" aria-expanded="false" aria-controls="Users"><i class="fa-solid fa-users fa-fw fa-2x" ></i> Users</li>
+                    <li class="mt-2 text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#Posts" aria-expanded="false" aria-controls="Posts"><i class="fa-solid fa-newspaper fa-fw fa-2x" ></i> Posts</li>
+                    <li class="mt-2 text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#Writepoem" aria-expanded="false" aria-controls="Writepoem"><i class="fa-solid fa-feather-pointed fa-fw fa-2x" ></i> Write Poem</li>
+                    <li class="mt-2 text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#repo" aria-expanded="false" aria-controls="repo"><i class="fa-solid fa-arrow-up-from-bracket fa-fw fa-2x" ></i> Repository</li>
+                </ul>
             </div>
-            <div class="col-9">
-                <div id="Users" class="accordion-collapse collapse" aria-labelledby="Users" data-bs-parent="#accordionFlushExample">
+            <div class="col-md-10 m-1">
+                <div id="Users" class="accordion-collapse collapse show" aria-labelledby="Users" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body" style="overflow: scroll !important;">
+                    <h3>Users</h3>
                         <table class="table" >
                             <thead>
                                 <th>Username</th>
@@ -51,7 +63,9 @@
                     </div>
                 </div>
                 <div id="Posts" class="accordion-collapse collapse" aria-labelledby="Posts" data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body" style="overflow: scroll !important;">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                    <div class="accordion-body" style="overflow: scroll !important;">
+                    <h3>Posts</h3>
+                    </div>
                 </div>
                 <div id="Writepoem" class="accordion-collapse collapse" aria-labelledby="Writepoem" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
@@ -83,9 +97,10 @@
                 </div>
                 <div id="repo" class="accordion-collapse collapse" aria-labelledby="repo" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
-                        <button class="btn btn-danger mb-1" data-bs-toggle="modal" data-bs-target="#audio" aria-expanded="false" aria-controls="audio"><i class="fa-solid fa-circle-up fa-fw"></i> Upload Audio</button>
-                        <button class="btn btn-warning mb-1" data-bs-toggle="modal" data-bs-target="#video" aria-expanded="false" aria-controls="video"><i class="fa-solid fa-circle-up fa-fw"></i> Upload Video</button>
-                        <button class="btn btn-success mb-1" data-bs-toggle="modal" data-bs-target="#image" aria-expanded="false" aria-controls="image"><i class="fa-solid fa-circle-up fa-fw"></i> Upload Photos</button>
+                        <button class="btn btn-danger mb-1" data-bs-toggle="modal" data-bs-target="#audio" aria-expanded="false" aria-controls="audio"><i class="fa-solid fa-circle-up fa-fw"></i> Audio</button>
+                        <button class="btn btn-warning mb-1" data-bs-toggle="modal" data-bs-target="#video" aria-expanded="false" aria-controls="video"><i class="fa-solid fa-circle-up fa-fw"></i> Video</button>
+                        <button class="btn btn-success mb-1" data-bs-toggle="modal" data-bs-target="#image" aria-expanded="false" aria-controls="image"><i class="fa-solid fa-circle-up fa-fw"></i> Photos</button>
+                        <button class="btn btn-info mb-1" data-bs-toggle="modal" data-bs-target="#word" aria-expanded="false" aria-controls="word"><i class="fa-solid fa-circle-up fa-fw"></i> Spoken-Word</button>
                     </div>
                 </div>
             </div>
@@ -202,8 +217,44 @@
                 </div>
             </div>
         </div>
+        <!-- Spoke Word Modal -->
+        <div class="modal fade" id="word" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="word" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="audio">Upload Spoken-Word</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="/upload_word" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <input type="hidden" name="user_id" value="{{Session::get('user')['id']}}">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="user"><i class="fa-solid fa-music"></i></span>
+                                <input type="file" name="audio" class="form-control" accept="audio/*">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="user"><i class="fa-solid fa-file"></i></span>
+                                <input type="text" name="title" class="form-control" placeholder="Title">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="user"><i class="fa-solid fa-folder"></i></span>
+                                <input type="text" name="topic" class="form-control" placeholder="Album">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="user"><i class="fa-solid fa-calendar fa-fw"></i></span>
+                                <input type="date" name="date" class="form-control" value="{{date('Y-m-d')}}">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="d-flex btn btn-primary mt-1 justify-content-center">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 <script>
 	CKEDITOR.replace('body');
 </script>
 {{View::make('footer')}}
-        

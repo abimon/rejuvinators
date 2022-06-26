@@ -21,6 +21,9 @@ Route::get('/logout', function () {
     Session::forget('user');
     return redirect('/');
 });
+Route::get('/login', function () {
+    return view('login');
+});
 Route::get('dashboard', function () {
     return view('dashboard');
 });
@@ -41,11 +44,13 @@ Route::get('views', function () {
 });
 Route::post('/signup',[mainController::class,'signup']);
 Route::post('/login',[mainController::class,'login']);
-Route::get('/dashboard',[mainController::class,'dashboard']);
-Route::post('/upload_audio',[mainController::class,'upload_audio']);
 Route::get('/music',[mainController::class,'music']);
-Route::post('/upload_video',[mainController::class,'upload_video']);
-Route::post('/upload_image',[mainController::class,'upload_image']);
+Route::get('/spokenword',[mainController::class,'spoken']);
 Route::get('/gallery',[mainController::class,'gallery']);
 Route::get('/poetry/{id}',[mainController::class,'poetry']);
+Route::get('/dashboard',[mainController::class,'dashboard']);
+Route::post('/upload_audio',[mainController::class,'upload_audio']);
+Route::post('/upload_word',[mainController::class,'upload_word']);
+Route::post('/upload_video',[mainController::class,'upload_video']);
+Route::post('/upload_image',[mainController::class,'upload_image']);
 Route::post('/writePoem',[mainController::class,'upload_post']);

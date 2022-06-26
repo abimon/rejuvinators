@@ -65,7 +65,7 @@
                     <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
                 @else
                     <li class="nav-item"><a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#sign">Signup</a></li>
-                    <li class="nav-item"><a class="nav-link"href="" data-bs-toggle="modal" data-bs-target="#login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link"href="/login" >Login</a></li>
                 @endif
                 </ul>
                 </div>
@@ -95,10 +95,6 @@
                             <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="user">
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="user"><i class="fa-solid fa-user fa-fw"></i></span>
-                            <input type="month" name="username" class="form-control">
-                        </div>
-                        <div class="input-group mb-3">
                             <span class="input-group-text" id="email"><i class="fa-solid fa-envelope fa-fw"></i></span>
                             <input type="email" name="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email">
                         </div>
@@ -121,39 +117,6 @@
                     <button type="submit" class="btn btn-primary">Register</button>
                 </div>
             </form>
-        </div>
-    </div>
-</div>
-<!--Login Modal-->
-<div class="modal fade" id="login" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="login" aria-hidden="true">
-    <div class="card modal-dialog ">
-        <div class="modal-content ">
-            <div class="modal-header d-flex justify-content-center">
-                <h5 class="modal-title" id="login">Login</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="d-flex justify-content-center">
-            <form action="/login" method="POST" class="w-75" style="text-align:center ;" enctype="multipart/form-data">
-                    @csrf
-                    <img class='card-img-top'src="{{asset('storage/static/logo.png')}}" width="300">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="user"><i class="fa-solid fa-user fa-fw"></i></span>
-                        <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="user">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="password"><i class="fa-solid fa-key fa-fw"></i></span>
-                        <input type="password" name="password" class="form-control" placeholder="Password" aria-label="password" aria-describedby="Password">
-                    </div>
-                    
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#sign">Join Instead</button>
-                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check fa-fw"></i>Login</button>
-                    
-                    </div>
-                </form>
-            </div>
-            
         </div>
     </div>
 </div>
